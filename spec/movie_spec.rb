@@ -48,11 +48,22 @@ describe(Movie) do
     end
   end
   describe('#update') do
-    it('updates the attributes of the instance') do
+    it('updates the movies in the database') do
       test_movie = Movie.new({:name => 'Oceans Twelve', :id => nil})
       test_movie.save()
       test_movie.update({:name => 'Oceans Eleven', :id => nil})
       expect(test_movie.name()).to(eq('Oceans Eleven'))
+    end
+  end
+
+  describe("#delete") do
+    it('deletes a movie from the database') do
+      test_movie = Movie.new({:name => "Oceans Eleven", :id => nil})
+      test_movie.save()
+      test_movie2 = Movie.new({:name => "Oceans Twelve", :id => nil})
+      test_movie2.save()
+      test_movie.delete()
+      expect(Movie.all()).to(eq([test_movie2]))
     end
   end
 end
