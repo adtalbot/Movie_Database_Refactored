@@ -29,4 +29,10 @@ class Actor
   define_method(:==) do |another_actor|
     self.name().==(another_actor.name()).&(self.id().==(another_actor.id()))
   end
+
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    DB.exec("UPDATE actors SET name = '#{@name}' WHERE id = #{@id};")
+  end
 end
