@@ -43,6 +43,7 @@ class Movie
 
   define_method(:delete) do
     DB.exec("DELETE FROM movies WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM actors_movies WHERE movie_id = #{self.id()};")
   end
 
   define_method(:actors) do
@@ -54,6 +55,6 @@ class Movie
       name = actor.first().fetch("name")
       movie_actors.push(Actor.new({:name => name, :id => actor_id}))
     end
-    movie_actors    
+    movie_actors
   end
 end
