@@ -11,4 +11,10 @@ describe(Actor) do
       expect(test_actor).to(be_an_instance_of(Actor))
     end
   end
+
+  describe(".all") do
+    it("starts off with no movies") do
+      expect(Actor.all()).to(eq([]))
+    end
+  end
 end
