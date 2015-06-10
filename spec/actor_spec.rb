@@ -17,4 +17,28 @@ describe(Actor) do
       expect(Actor.all()).to(eq([]))
     end
   end
+
+  describe(".find") do
+    it('returns a actor by its id number') do
+      test_actor = Actor.new({:name => "Brad Pitt", :id => nil})
+      test_actor.save()
+      test_actor2 = Actor.new({:name => "George Clooney", :id => nil})
+      test_actor2.save()
+      expect(Actor.find(test_actor2.id())).to(eq(test_actor2))
+    end
+  end
+  describe('#save') do
+    it('saves an actor to the database') do
+      test_actor = Actor.new({:name => 'Brad Pitt', :id => nil})
+      test_actor.save()
+      expect(Actor.all()).to(eq([test_actor]))
+    end
+  end
+  describe('#==') do
+    it('returns true if two actors have the same name and same id') do
+      test_actor = Actor.new({:name => 'Brad Pitt', :id => nil})
+      test_actor2 = Actor.new({:name => 'Brad Pitt', :id => nil})
+      expect(test_actor).to(eq(test_actor2))
+    end
+  end
 end
