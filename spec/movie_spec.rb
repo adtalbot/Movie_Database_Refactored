@@ -47,4 +47,12 @@ describe(Movie) do
       expect(Movie.find(test_movie2.id())).to(eq(test_movie2))
     end
   end
+  describe('#update') do
+    it('updates the attributes of the instance') do
+      test_movie = Movie.new({:name => 'Oceans Twelve', :id => nil})
+      test_movie.save()
+      test_movie.update({:name => 'Oceans Eleven', :id => nil})
+      expect(test_movie.name()).to(eq('Oceans Eleven'))
+    end
+  end
 end

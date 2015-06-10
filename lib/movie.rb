@@ -31,4 +31,9 @@ class Movie
     name = result.first().fetch("name")
     Movie.new({:name => name, :id => id})
   end
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    DB.exec("UPDATE movies SET name = '#{@name}' WHERE id = #{@id};")
+  end    
 end
