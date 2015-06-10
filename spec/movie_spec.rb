@@ -8,7 +8,7 @@ describe(Movie) do
       expect(test_movie.name()).to(eq('Braveheart'))
     end
   end
-  
+
   describe('#id') do
     it('returns the id when you save it') do
       test_movie = Movie.new({:name => 'Braveheart', :id => nil})
@@ -36,6 +36,15 @@ describe(Movie) do
       test_movie = Movie.new({:name => 'Braveheart', :id => nil})
       test_movie2 = Movie.new({:name => 'Braveheart', :id => nil})
       expect(test_movie).to(eq(test_movie2))
+    end
+  end
+  describe(".find") do
+    it("returns a movie by its id") do
+      test_movie = Movie.new({:name => "Oceans Eleven", :id => nil})
+      test_movie.save()
+      test_movie2 = Movie.new({:name => "Oceans twelve", :id => nil})
+      test_movie2.save()
+      expect(Movie.find(test_movie2.id())).to(eq(test_movie2))
     end
   end
 end
