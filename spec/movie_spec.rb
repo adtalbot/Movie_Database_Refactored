@@ -54,6 +54,17 @@ describe(Movie) do
       test_movie.update({:name => 'Oceans Eleven', :id => nil})
       expect(test_movie.name()).to(eq('Oceans Eleven'))
     end
+
+    it('lets you add an actor to a movie') do
+      test_movie = Movie.new({:name => 'Oceans Eleven', :id => nil})
+      test_movie.save()
+      test_actor = Actor.new({:name => 'George Clooney', :id => nil})
+      test_actor.save()
+      test_actor2 = Actor.new({:name => 'Channing Tatem', :id => nil})
+      test_actor2.save()
+      test_movie.update({:actor_ids => [test_actor.id(), test_actor2.id()]})
+      expect(test_movie.actors()).to(eq([test_actor, test_actor2]))
+    end
   end
 
   describe("#delete") do
@@ -64,6 +75,18 @@ describe(Movie) do
       test_movie2.save()
       test_movie.delete()
       expect(Movie.all()).to(eq([test_movie2]))
+    end
+  end
+  describe('#actors') do
+    it('returns all the actors for a particular movie') do
+      test_movie = Movie.new({:name => 'Braveheart', :id => nil})
+      test_movie.save()
+      test_actor = Actor.new({:name => 'Mel Gibson', :id => nil})
+      test_actor.save()
+      test_actor2 = Actor.new({:name => 'Sean Connery', :id => nil})
+      test_actor2.save()
+      test_movie.update({:actor_ids => [test_actor.id(), test_actor2.id()]})
+      expect(test_movie.actors()).to(eq([test_actor, test_actor2]))
     end
   end
 end
